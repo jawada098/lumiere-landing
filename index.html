@@ -19,14 +19,12 @@
     html,body{margin:0; padding:0; background:var(--bg); color:var(--fg);}
     body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;}
     .wrap{max-width:var(--max); margin:0 auto; padding:64px 20px;}
-    header{padding:96px 0 48px;}
+    header{padding:96px 0 48px; text-align:left;}
     section{padding:28px 0;}
     .rule{height:1px;background:var(--line);margin:28px 0;}
-    .eyebrow{letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-size:12px}
-    h1{font-family:Newsreader,Georgia,Times,serif; font-weight:700; font-size:52px; line-height:1.05; letter-spacing:var(--tight); margin:10px 0 14px;}
-    .dek{font-size:20px; color:#d4d4d4; letter-spacing:0.01em; max-width:52ch}
+    h1{font-family:Newsreader,Georgia,Times,serif; font-weight:700; font-size:56px; line-height:1.1; margin:0 0 16px;}
+    .dek{font-size:20px; color:#d4d4d4; letter-spacing:0.01em; max-width:52ch; margin-bottom:12px;}
     h2{font-weight:600; font-size:18px; letter-spacing:.06em; text-transform:uppercase; color:#dcdcdc; margin:0 0 10px}
-    p{margin:8px 0 0}
     .list{margin:0; padding:0; list-style:none}
     .list li{margin:6px 0 0; color:#d6d6d6}
     .strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 0; display:grid; grid-template-columns: 1fr; gap:16px;}
@@ -58,18 +56,19 @@
 <body class="grain">
   <div class="wrap">
     <header>
-      <h1 style="font-size:56px; font-weight:700; margin-bottom:16px;">Lumiere Initiative</h1>
+      <h1>Lumiere Initiative</h1>
       <div class="dek">Own the movies you love. Trade the upside.</div>
       <div class="dek">A regulated way to invest in <strong>film slates</strong> with liquidity at natural milestones — picture-lock, distribution deal, release.</div>
     </header>
 
     <div class="rule"></div>
 
+    <!-- Problem / Solution -->
     <section class="strip">
       <div class="col">
         <h2>Problem</h2>
         <ul class="list">
-          <li>Indie films face A$250k—A$1m gaps even with distro interest.</li>
+          <li>Independent films face A$250k—A$1m gaps even with distribution interest.</li>
           <li>Fans spend, but get no ownership; investors endure 5–10y holds.</li>
         </ul>
       </div>
@@ -77,10 +76,12 @@
         <h2>Solution</h2>
         <ul class="list">
           <li>Regulated slate raises (equity or revenue-share notes).</li>
-          <li>Milestone-based secondary trading → trade at picture-lock, distro deal, or release — not 10-year holds.</li>
+          <li>Milestone-based secondary trading → trade at picture-lock, distribution deal, or release — not 10-year holds.</li>
         </ul>
+      </div>
     </section>
 
+    <!-- Waitlist -->
     <section>
       <h2>Join the waitlist</h2>
       <p><strong>First slate:</strong> 5 independent films, $250k–$1M budgets, $3.5M total raise.</p>
@@ -97,7 +98,9 @@
 
     <div class="rule"></div>
 
+    <!-- What we're building / Why now -->
     <section class="strip">
+      <div class="col">
         <h2>What we’re building</h2>
         <ul class="list">
           <li>Primary: 5-film slates with standardized waterfalls.</li>
@@ -108,32 +111,4 @@
       <div class="col">
         <h2>Why now</h2>
         <ul class="list">
-          <li>CSF (AU) + Reg CF / Reg A+ (US) enable compliant retail access.</li>
-          <li>Audiences primed to back creators — now with real upside.</li>
-        </ul>
-    </section>
-
-    <footer>© <span id="y"></span> Lumiere Initiative</footer>
-  </div>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    const form = document.getElementById('waitlist');
-    const ok = document.getElementById('ok');
-    const bad = document.getElementById('bad');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      ok.style.display='none'; bad.style.display='none';
-      try{
-        const resp = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (resp.ok) { ok.style.display='block'; form.reset(); }
-        else { bad.style.display='block'; }
-      } catch(err){ bad.style.display='block'; }
-    });
-  </script>
-</body>
-</html>
+          <li>CSF
