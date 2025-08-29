@@ -7,19 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0a0a0a;
-      --fg:#f3f3f3;
-      --muted:#9ca3af;
-      --line:#2a2a2a;
-      --accent:#ffffff;
-      --max:860px;
-      --tight:-0.02em;
+      --bg:#0a0a0a; --fg:#f3f3f3; --muted:#9ca3af; --line:#2a2a2a; --accent:#ffffff;
+      --max:860px; --tight:-0.02em;
     }
     *{box-sizing:border-box}
     html,body{margin:0; padding:0; background:var(--bg); color:var(--fg);}
     body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;}
     .wrap{max-width:var(--max); margin:0 auto; padding:64px 20px;}
-    header{padding:64px 0 32px; text-align:left;}
+    header{padding:64px 0 32px;}
     section{padding:32px 0;}
     .rule{height:1px;background:var(--line);margin:32px 0;}
     h1{font-family:Newsreader,Georgia,Times,serif; font-weight:700; font-size:56px; line-height:1.1; margin:0 0 16px;}
@@ -31,19 +26,10 @@
     .strip .col{display:flex; flex-direction:column; gap:6px}
     @media(min-width:900px){ .strip{grid-template-columns: 1fr 1fr; gap:24px;} }
     form{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-    input[type=email]{
-      flex:1; min-width:260px;
-      background:#0f0f0f; border:1px solid var(--line); color:var(--fg);
-      padding:12px 14px; border-radius:10px; outline:none;
-    }
+    input[type=email]{flex:1; min-width:260px; background:#0f0f0f; border:1px solid var(--line); color:var(--fg); padding:12px 14px; border-radius:10px; outline:none;}
     input[type=email]::placeholder{color:#7c7c7c}
-    button{
-      background:var(--accent); color:#000; border:1px solid #fff; 
-      padding:12px 18px; border-radius:10px; font-weight:700; cursor:pointer;
-      transition:transform .08s ease, opacity .2s ease;
-    }
-    button:hover{transform:translateY(-1px)}
-    button:active{transform:translateY(0)}
+    button{background:var(--accent); color:#000; border:1px solid #fff; padding:12px 18px; border-radius:10px; font-weight:700; cursor:pointer; transition:transform .08s ease, opacity .2s ease;}
+    button:hover{transform:translateY(-1px)} button:active{transform:translateY(0)}
     small{color:var(--muted)}
     .note{margin-top:12px; font-size:14px; display:none; border:1px solid var(--line); border-radius:10px; padding:10px 12px}
     .ok{background:#0f2214; color:#b7f7c5; border-color:#1f4d2d}
@@ -51,6 +37,8 @@
     .grain:before{content:""; position:fixed; inset:0; pointer-events:none; background-image:radial-gradient(rgba(255,255,255,.02) 1px, transparent 1px); background-size:3px 3px; opacity:.6; mix-blend-mode:soft-light;}
     footer{padding:40px 0 20px; text-align:center; color:var(--muted); font-size:12px}
     .social-proof { font-size:15px; color:#bcbcbc; margin-top:10px; }
+    .faq dt{font-weight:600; margin-top:14px}
+    .faq dd{margin:4px 0 10px 0; color:#d6d6d6}
   </style>
 </head>
 <body class="grain">
@@ -82,7 +70,7 @@
     <!-- Waitlist -->
     <section>
       <h2>Join the waitlist</h2>
-      <p><strong>First slate:</strong> 5 independent films, $250k–$1M budgets, $3.5M total raise.</p>
+      <p><strong>First slate:</strong> 5 indie horror films, $250k–$1M budgets, $3.5M total raise.</p>
       <p class="social-proof">Join 50+ film fans and industry professionals already on the waitlist.</p>
       <form id="waitlist" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <input type="email" name="email" placeholder="your@email.com" required>
@@ -94,7 +82,7 @@
       <small>This is not an offer of securities. Any investments will be made only through compliant disclosures and intermediaries.</small>
     </section>
 
-    <!-- What we're building / Why now -->
+    <!-- What & Why (with timeline in What) -->
     <section class="strip">
       <div class="col">
         <h2>What we’re building</h2>
@@ -102,6 +90,7 @@
           <li>Primary: 5-film slates with standardized waterfalls.</li>
           <li>Secondary: scheduled trading windows post-milestones.</li>
           <li>Investor dashboards with transparent reporting.</li>
+          <li style="margin-top:8px; color:#bcbcbc"><em>Timeline:</em> Launch Q4 2025 (Australia CSF) • Target $3.5M first slate • Secondary opens post picture-lock</li>
         </ul>
       </div>
       <div class="col">
@@ -109,16 +98,34 @@
         <ul class="list">
           <li>CSF (AU) + Reg CF / Reg A+ (US) enable compliant retail access.</li>
           <li>Audiences primed to back creators — now with real upside.</li>
-          <li>Streaming dominance shrinking studio slates creates financing gap.</li>
+          <li>Streaming slates are shrinking → financing gap for indies.</li>
         </ul>
       </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <h2>FAQ</h2>
+      <dl class="faq">
+        <dt>How much can I invest?</dt>
+        <dd>Starting at ~$500 minimum (CSF retail caps apply).</dd>
+
+        <dt>When can I sell my shares?</dt>
+        <dd>At milestone windows (e.g., picture-lock, distribution deal, release) — not 10-year holds.</dd>
+
+        <dt>What returns can I expect?</dt>
+        <dd>Film investments are high-risk. Past performance doesn’t predict future results.</dd>
+      </dl>
     </section>
 
     <footer>© <span id="y"></span> Lumiere Initiative</footer>
   </div>
 
   <script>
+    // year
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // inline Formspree submit (no redirect)
     const form = document.getElementById('waitlist');
     const ok = document.getElementById('ok');
     const bad = document.getElementById('bad');
