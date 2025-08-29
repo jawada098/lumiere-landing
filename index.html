@@ -19,9 +19,9 @@
     html,body{margin:0; padding:0; background:var(--bg); color:var(--fg);}
     body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6;}
     .wrap{max-width:var(--max); margin:0 auto; padding:64px 20px;}
-    header{padding:96px 0 48px; text-align:left;}
-    section{padding:28px 0;}
-    .rule{height:1px;background:var(--line);margin:28px 0;}
+    header{padding:64px 0 32px; text-align:left;}
+    section{padding:32px 0;}
+    .rule{height:1px;background:var(--line);margin:32px 0;}
     h1{font-family:Newsreader,Georgia,Times,serif; font-weight:700; font-size:56px; line-height:1.1; margin:0 0 16px;}
     .dek{font-size:20px; color:#d4d4d4; letter-spacing:0.01em; max-width:52ch; margin-bottom:12px;}
     h2{font-weight:600; font-size:18px; letter-spacing:.06em; text-transform:uppercase; color:#dcdcdc; margin:0 0 10px}
@@ -61,8 +61,6 @@
       <div class="dek">A regulated way to invest in <strong>film slates</strong> with liquidity at natural milestones — picture-lock, distribution deal, release.</div>
     </header>
 
-    <div class="rule"></div>
-
     <!-- Problem / Solution -->
     <section class="strip">
       <div class="col">
@@ -96,8 +94,6 @@
       <small>This is not an offer of securities. Any investments will be made only through compliant disclosures and intermediaries.</small>
     </section>
 
-    <div class="rule"></div>
-
     <!-- What we're building / Why now -->
     <section class="strip">
       <div class="col">
@@ -111,4 +107,34 @@
       <div class="col">
         <h2>Why now</h2>
         <ul class="list">
-          <li>CSF
+          <li>CSF (AU) + Reg CF / Reg A+ (US) enable compliant retail access.</li>
+          <li>Audiences primed to back creators — now with real upside.</li>
+          <li>Streaming dominance shrinking studio slates creates financing gap.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>© <span id="y"></span> Lumiere Initiative</footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const form = document.getElementById('waitlist');
+    const ok = document.getElementById('ok');
+    const bad = document.getElementById('bad');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.style.display='none'; bad.style.display='none';
+      try{
+        const resp = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (resp.ok) { ok.style.display='block'; form.reset(); }
+        else { bad.style.display='block'; }
+      } catch(err){ bad.style.display='block'; }
+    });
+  </script>
+</body>
+</html>
