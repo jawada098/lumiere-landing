@@ -70,11 +70,20 @@
     <!-- Waitlist -->
     <section>
       <h2>Join the waitlist</h2>
-      <p><strong>First slate:</strong> 5 indie horror films, $250k–$1M budgets, $3.5M total raise.</p>
+      <p><strong>First slate:</strong> 5 independent films, $250k–$1M budgets, $3.5M total raise.</p>
       <p class="social-proof">Join 50+ film fans and industry professionals already on the waitlist.</p>
-     <form id="waitlist" action="https://formspree.io/f/mrbaekkd" method="POST">
+      <form id="waitlist" action="https://script.google.com/macros/s/AKfycbwEIFVJH8LhEK68LQLHPj_R4U7JM8i8liXAp9KcHn0R7RvSIGtwJY8sgIaA0oBNcqnN/exec" method="POST">
         <input type="email" name="email" placeholder="your@email.com" required>
+        <!-- Honeypot -->
         <input type="text" name="_gotcha" style="display:none" autocomplete="off">
+        <!-- Attribution fields -->
+        <input type="hidden" name="utm_source" id="utm_source">
+        <input type="hidden" name="utm_medium" id="utm_medium">
+        <input type="hidden" name="utm_campaign" id="utm_campaign">
+        <input type="hidden" name="page_url" id="page_url">
+        <input type="hidden" name="user_agent" id="user_agent">
+        <input type="hidden" name="ts" id="ts">
+
         <button type="submit">Request early access</button>
       </form>
       <div id="ok" class="note ok">Thanks — you’re on the list. We’ll email as soon as Slate #1 opens.</div>
@@ -82,7 +91,7 @@
       <small>This is not an offer of securities. Any investments will be made only through compliant disclosures and intermediaries.</small>
     </section>
 
-    <!-- What & Why (with timeline in What) -->
+    <!-- What & Why -->
     <section class="strip">
       <div class="col">
         <h2>What we’re building</h2>
@@ -122,26 +131,26 @@
   </div>
 
   <script>
-    // year
+    // set footer year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // inline Formspree submit (no redirect)
-    const form = document.getElementById('waitlist');
-    const ok = document.getElementById('ok');
-    const bad = document.getElementById('bad');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      ok.style.display='none'; bad.style.display='none';
-      try{
-        const resp = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (resp.ok) { ok.style.display='block'; form.reset(); }
-        else { bad.style.display='block'; }
-      } catch(err){ bad.style.display='block'; }
-    });
+    // attribution & success handling
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v || ""; };
+      set('utm_source', params.get('utm_source'));
+      set('utm_medium', params.get('utm_medium'));
+      set('utm_campaign', params.get('utm_campaign'));
+      set('page_url', location.href);
+      set('user_agent', navigator.userAgent);
+      set('ts', new Date().toISOString());
+
+      // show success if redirected back with ?ok=1
+      if (params.get('ok') === '1') {
+        const ok = document.getElementById('ok');
+        if (ok) ok.style.display = 'block';
+      }
+    })();
   </script>
 </body>
 </html>
